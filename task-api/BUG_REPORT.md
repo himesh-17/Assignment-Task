@@ -13,9 +13,9 @@ While writing unit and integration tests for the Task Manager API, I identified 
 
 | Bug                                      | Severity | Status  |
 | ---------------------------------------- | -------- | ------- |
-| Pagination offset calculation            | Critical | ✅ Fixed |
-| Status filtering uses substring matching | Medium   | ✅ Fixed |
-| Task completion resets priority          | Medium   | ✅ Fixed |
+| Pagination offset calculation            | Critical | Fixed   |
+| Status filtering uses substring matching | Medium   | Fixed   |
+| Task completion resets priority          | Medium   | Fixed   |
 
 ---
 

@@ -10,7 +10,7 @@ The objective of the assignment was to understand an unfamiliar codebase, write 
 
 # Completed Tasks
 
-## ✅ Unit Tests
+## Unit Tests
 
 Added comprehensive unit tests for `taskService.js`, covering:
 
@@ -28,7 +28,7 @@ Added comprehensive unit tests for `taskService.js`, covering:
 
 ---
 
-## ✅ Integration Tests
+## Integration Tests
 
 Added API integration tests using **Jest** and **Supertest** covering:
 
@@ -46,7 +46,7 @@ Each endpoint includes both happy-path and edge-case scenarios.
 
 ---
 
-## ✅ Bug Investigation
+##  Bug Investigation
 
 During testing, multiple issues were identified and documented in **BUG_REPORT.md**.
 
@@ -60,13 +60,13 @@ The report includes:
 
 ---
 
-## ✅ Bug Fix
+##  Bug Fixed
 
 Fixed identified issues in the application and updated the corresponding tests to verify the corrected behavior.
 
 ---
 
-## ✅ New Feature
+##  New Feature Added
 
 Implemented the required endpoint:
 
@@ -112,13 +112,24 @@ Example:
 Test Suites: 2 passed
 Tests: 79 passed
 
-Statements : XX%
-Branches   : XX%
-Functions  : XX%
-Lines       : XX%
+Statements : 96.81%
+Branches   : 94.5%
+Functions  : 93.33%
+Lines       : 95.6%
 ```
 
 ---
+
+## Test Results
+
+### All Tests Passing
+
+![All Tests Passing](screenshots/tests-passed.png)
+
+### Test Coverage
+
+![Coverage Report](screenshots/coverage.png)
+
 
 # Project Structure
 
@@ -126,60 +137,14 @@ Lines       : XX%
 task-api/
 │
 ├── src/
-│   ├── routes/
-│   ├── services/
-│   └── app.js
-│
 ├── tests/
-│   ├── taskService.test.js
-│   └── api.test.js
-│
+├── screenshots/
+│   ├── coverage.png
+│   └── tests-passed.png
 ├── BUG_REPORT.md
 ├── README.md
 ├── package.json
 └── .gitignore
-```
-
----
-
-# Getting Started
-
-## Install dependencies
-
-```bash
-npm install
-```
-
----
-
-## Start the server
-
-```bash
-npm start
-```
-
----
-
-## Run all tests
-
-```bash
-npm test
-```
-
----
-
-## Generate coverage report
-
-If a coverage script exists:
-
-```bash
-npm run coverage
-```
-
-Otherwise:
-
-```bash
-npx jest --coverage
 ```
 
 ---
@@ -218,3 +183,4 @@ Given additional time, I would focus on:
 **Himesh**
 
 Take-Home Assignment Submission – 2026
+
