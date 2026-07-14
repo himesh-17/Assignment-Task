@@ -5,7 +5,7 @@ beforeEach(() => {
   taskService._reset();
 });
 
-// create
+// Create a task via the API
 
 describe('taskService.create', () => {
   it('should create a task with all default fields populated', () => {
@@ -69,9 +69,7 @@ describe('taskService.getAll', () => {
   });
 });
 
-// ─────────────────────────────────────────────────────────
 // FIND BY ID
-// ─────────────────────────────────────────────────────────
 describe('taskService.findById', () => {
   it('should find a task by its ID', () => {
     const task = taskService.create({ title: 'Find Me' });
@@ -85,9 +83,8 @@ describe('taskService.findById', () => {
   });
 });
 
-// ─────────────────────────────────────────────────────────
 // GET BY STATUS
-// ─────────────────────────────────────────────────────────
+// 
 describe('taskService.getByStatus', () => {
   it('should filter tasks by status', () => {
     taskService.create({ title: 'Todo 1', status: 'todo' });
@@ -114,9 +111,7 @@ describe('taskService.getByStatus', () => {
   });
 });
 
-// ─────────────────────────────────────────────────────────
 // GET PAGINATED
-// ─────────────────────────────────────────────────────────
 describe('taskService.getPaginated', () => {
   beforeEach(() => {
     for (let i = 1; i <= 15; i++) {
@@ -144,9 +139,7 @@ describe('taskService.getPaginated', () => {
   });
 });
 
-// ─────────────────────────────────────────────────────────
 // GET STATS
-// ─────────────────────────────────────────────────────────
 describe('taskService.getStats', () => {
   it('should return zero counts when no tasks exist', () => {
     const stats = taskService.getStats();
@@ -192,9 +185,9 @@ describe('taskService.getStats', () => {
   });
 });
 
-// ─────────────────────────────────────────────────────────
+// 
 // UPDATE
-// ─────────────────────────────────────────────────────────
+// 
 describe('taskService.update', () => {
   it('should update specific fields of a task', () => {
     const task = taskService.create({ title: 'Original' });
@@ -218,9 +211,7 @@ describe('taskService.update', () => {
   });
 });
 
-// ─────────────────────────────────────────────────────────
 // REMOVE
-// ─────────────────────────────────────────────────────────
 describe('taskService.remove', () => {
   it('should remove a task and return true', () => {
     const task = taskService.create({ title: 'Delete Me' });
@@ -241,9 +232,8 @@ describe('taskService.remove', () => {
   });
 });
 
-// ─────────────────────────────────────────────────────────
+// 
 // COMPLETE TASK
-// ─────────────────────────────────────────────────────────
 describe('taskService.completeTask', () => {
   it('should mark a task as done and set completedAt', () => {
     const task = taskService.create({ title: 'Finish this', status: 'todo' });
@@ -258,12 +248,12 @@ describe('taskService.completeTask', () => {
     expect(taskService.completeTask('nonexistent')).toBeNull();
   });
 
-  // BUG: completeTask silently resets priority to 'medium'.
-  it('BUG — completeTask resets priority to medium regardless of original priority', () => {
+  // completeTask silently resets priority to 'medium'.
+  it('completeTask resets priority to medium regardless of original priority', () => {
     const task = taskService.create({ title: 'Urgent', priority: 'high' });
     const completed = taskService.completeTask(task.id);
-    // The bug forces priority to 'medium'
-    expect(completed.priority).toBe('high'); // BUG: should remain 'high'
+
+    expect(completed.priority).toBe('high'); 
   });
 
   it('should persist the completion in the store', () => {
@@ -275,9 +265,8 @@ describe('taskService.completeTask', () => {
   });
 });
 
-// ─────────────────────────────────────────────────────────
+
 // ASSIGN TASK
-// ─────────────────────────────────────────────────────────
 describe('taskService.assignTask', () => {
   it('should assign a person to a task', () => {
     const task = taskService.create({ title: 'Assign Me' });
@@ -312,9 +301,7 @@ describe('taskService.assignTask', () => {
   });
 });
 
-// ─────────────────────────────────────────────────────────
 // _RESET (test utility)
-// ─────────────────────────────────────────────────────────
 describe('taskService._reset', () => {
   it('should clear all tasks', () => {
     taskService.create({ title: 'A' });

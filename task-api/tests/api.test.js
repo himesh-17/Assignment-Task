@@ -2,22 +2,20 @@ const request = require('supertest');
 const app = require('../src/app');
 const taskService = require('../src/services/taskService');
 
-// Reset the in-memory store before each test to ensure isolation
+// Reset the in-memory store before each test
 beforeEach(() => {
   taskService._reset();
 });
 
-// ─────────────────────────────────────────────────────────
 // Helper: quickly create a task via the API
-// ─────────────────────────────────────────────────────────
 const createTask = (overrides = {}) =>
   request(app)
     .post('/tasks')
     .send({ title: 'Test Task', ...overrides });
 
-// ==========================================================
+
 // POST /tasks — Create a task
-// ==========================================================
+
 describe('POST /tasks', () => {
   it('should create a task with valid data and return 201', async () => {
     const res = await createTask({ title: 'New Task', priority: 'high' });
@@ -94,9 +92,7 @@ describe('POST /tasks', () => {
   });
 });
 
-// ==========================================================
 // GET /tasks — List tasks
-// ==========================================================
 describe('GET /tasks', () => {
   it('should return an empty array when no tasks exist', async () => {
     const res = await request(app).get('/tasks');
@@ -114,9 +110,7 @@ describe('GET /tasks', () => {
   });
 });
 
-// ==========================================================
 // GET /tasks?status= — Filter by status
-// ==========================================================
 describe('GET /tasks?status=', () => {
   it('should filter tasks by status', async () => {
     await createTask({ title: 'Todo', status: 'todo' });
@@ -135,7 +129,7 @@ describe('GET /tasks?status=', () => {
     expect(res.body).toEqual([]);
   });
 
-  // Edge case — BUG: partial status match via includes()
+  // Edge case — partial status match via includes()
   it('should not partially match status values', () => {
   taskService.create({ title: 'Completed', status: 'done' });
 
@@ -144,9 +138,7 @@ describe('GET /tasks?status=', () => {
 });
 });
 
-// ==========================================================
 // GET /tasks?page=&limit= — Pagination
-// ==========================================================
 describe('GET /tasks?page=&limit=', () => {
   beforeEach(async () => {
     for (let i = 1; i <= 12; i++) {
@@ -175,9 +167,8 @@ describe('GET /tasks?page=&limit=', () => {
   });
 });
 
-// ==========================================================
 // PUT /tasks/:id — Update a task
-// ==========================================================
+
 describe('PUT /tasks/:id', () => {
   it('should update a task and return 200', async () => {
     const createRes = await createTask({ title: 'Original' });
@@ -242,13 +233,11 @@ describe('PUT /tasks/:id', () => {
 
     expect(res.status).toBe(200);
     expect(res.body.priority).toBe('high');
-    expect(res.body.title).toBe('Original'); // untouched
+    expect(res.body.title).toBe('Original'); 
   });
 });
 
-// ==========================================================
 // DELETE /tasks/:id — Delete a task
-// ==========================================================
 describe('DELETE /tasks/:id', () => {
   it('should delete a task and return 204', async () => {
     const createRes = await createTask({ title: 'Delete Me' });
@@ -337,9 +326,7 @@ describe('PATCH /tasks/:id/complete', () => {
   });
 });
 
-// ==========================================================
 // PATCH /tasks/:id/assign — Assign a task
-// ==========================================================
 describe('PATCH /tasks/:id/assign', () => {
   it('should assign a person to a task and return 200', async () => {
     const createRes = await createTask({ title: 'Assign Me' });
@@ -436,9 +423,7 @@ describe('PATCH /tasks/:id/assign', () => {
   });
 });
 
-// ==========================================================
 // GET /tasks/stats — Stats endpoint
-// ==========================================================
 describe('GET /tasks/stats', () => {
   it('should return zero counts when no tasks exist', async () => {
     const res = await request(app).get('/tasks/stats');
@@ -491,9 +476,7 @@ describe('GET /tasks/stats', () => {
   });
 });
 
-// ==========================================================
 // Edge case: Unknown routes
-// ==========================================================
 describe('Unknown routes', () => {
   it('should return 404 for an unknown path', async () => {
     const res = await request(app).get('/unknown-path');
